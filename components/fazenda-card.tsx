@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { PencilIcon } from "lucide-react"
 
-interface FazendaCardProps {
+interface PropriedadeAgricolaCardProps {
   id: string
   nome: string
   localizacao: string
@@ -12,7 +12,13 @@ interface FazendaCardProps {
   onClick: () => void
 }
 
-export function FazendaCard({ id, nome, localizacao, areasCadastradas, onClick }: FazendaCardProps) {
+export function PropriedadeAgricolaCard({
+  id,
+  nome,
+  localizacao,
+  areasCadastradas,
+  onClick,
+}: PropriedadeAgricolaCardProps) {
   return (
     <Card className="p-4 bg-teal-50 hover:bg-teal-100 transition-colors cursor-pointer" onClick={onClick}>
       <div className="flex justify-between items-start">

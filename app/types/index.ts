@@ -7,17 +7,86 @@ export interface Usuario {
   organizacao: string
 }
 
-export interface Fazenda {
+export interface PropriedadeAgricola {
   id: string
   nome: string
-  localizacao: string
+  proprietario: string
+  tecnicoResponsavel: string
+  telefoneContato: string
+  emailResponsavel: string
+  municipio: string
+  estado: string
+  latitude: string
+  longitude: string
+  areaTotal: number
+  areaIrrigada: number
+  culturasExploradas: string[]
+  tipoIrrigacao: string
+  observacoes: string
   areasCadastradas: number
+}
+
+export interface Unidade {
+  id: string
+  nome: string
+  tipo: "setor-hidraulico" | "pivo-central"
+  propriedadeId: string
+}
+
+export interface SetorHidraulico {
+  id: string
+  identificacao: string
+  area: number
+  tipoEmissor: string
+  fabricanteEmissor: string
+  modeloEmissor: string
+  vazaoNominal: number
+  pressaoTrabalho: number
+  distanciaEmissores: number
+  distanciaLinhas: number
+  tipoFiltro: string
+  malhaFiltro: string
+  pressaoEntrada: number
+  tipoValvula: string
+  tipoEnergia: string
+  condicoesGerais: string
+  numeroEmissores: number
+  frequenciaManutenção: string
+  dataUltimaAvaliacao: string
+  propriedadeId: string
+}
+
+export interface PivoCentral {
+  id: string
+  identificacao: string
+  area: number
+  numeroTorres: number
+  comprimentoTotal: number
+  fabricante: string
+  modelo: string
+  tipoEmissao: string
+  tipoEnergia: string
+  potenciaMotor: number
+  vazaoOperacao: number
+  pressaoOperacao: number
+  tipoControle: string
+  possuiFertirrigacao: boolean
+  tipoFonteHidrica: string
+  tempoFuncionamento: number
+  velocidadeDeslocamento: number
+  tipoBocal: string
+  pressaoBocais: number
+  dataUltimaManutencao: string
+  frequenciaManutencao: string
+  problemasObservados: string
+  dataUltimaAvaliacao: string
+  propriedadeId: string
 }
 
 export interface Area {
   id: string
   nome: string
-  fazendaId: string
+  propriedadeId: string
   cultura: string
 }
 

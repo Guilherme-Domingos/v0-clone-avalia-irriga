@@ -24,8 +24,8 @@ export default function Login() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-white">
       <div className="w-full max-w-md p-6 space-y-6">
         <div className="flex flex-col items-center justify-center">
-          <div className="bg-teal-600 p-4 rounded-xl">
-            <Image src="/logo.png" alt="AvaliaIrriga Logo" width={60} height={60} className="text-white" />
+          <div className="bg-white p-2 rounded-xl">
+            <Image src="/logo.png" alt="AvaliaIrriga Logo" width={80} height={80} className="object-contain" />
           </div>
           <h1 className="mt-4 text-3xl font-bold text-gray-900">AvaliaIrriga</h1>
         </div>

@@ -13,7 +13,7 @@ export function NavBar({ activeItem }: NavBarProps) {
         className={`flex flex-col items-center ${activeItem === "fazendas" || activeItem === "areas" ? "opacity-100" : "opacity-70"}`}
       >
         <LayoutGrid className="h-5 w-5" />
-        <span className="text-xs mt-1">{activeItem === "fazendas" ? "fazendas" : "áreas"}</span>
+        <span className="text-xs mt-1">{activeItem === "fazendas" ? "propriedades" : "áreas"}</span>
       </Link>
 
       <Link

@@ -37,7 +37,7 @@ export default function Avaliacoes({ params }: { params: { areaId: string } }) {
       <main className="flex-1 px-4 space-y-4">
         <Button
           className="w-full bg-teal-600 hover:bg-teal-700 text-white rounded-md flex items-center justify-center gap-2 py-6"
-          onClick={() => router.push(`/avaliacoes/${params.areaId}/nova`)}
+          onClick={() => router.push(`/avaliacoes/${params.areaId}/setor-hidraulico/nova`)}
         >
           <PlusIcon className="h-5 w-5" />
           <span>Nova avaliação</span>
