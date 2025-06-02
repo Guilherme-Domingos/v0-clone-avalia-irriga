@@ -97,93 +97,82 @@ export function PontoAvaliacaoModal({
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <Card className="w-full max-w-md bg-white">
         <div className="p-4">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-medium">
-              Ponto {labels[linha]} x {labels[coluna]}
-            </h3>
-            <Button variant="ghost" size="icon" onClick={onFechar}>
-              <X className="h-4 w-4" />
+          <div className="flex justify-end mb-2">
+            <Button variant="ghost" size="icon" onClick={onFechar} className="text-teal-600">
+              <X className="h-5 w-5" />
             </Button>
           </div>
 
-          <div className="space-y-4">
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse border border-gray-300">
-                <thead>
-                  <tr className="bg-gray-50">
-                    <th className="border border-gray-300 px-2 py-1 text-sm">Rep.</th>
-                    <th className="border border-gray-300 px-2 py-1 text-sm">Volume</th>
-                    <th className="border border-gray-300 px-2 py-1 text-sm">Tempo</th>
-                    <th className="border border-gray-300 px-2 py-1 text-sm">Vazão(l/h)</th>
-                    <th className="border border-gray-300 px-2 py-1 text-sm">Ação</th>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse border border-gray-300">
+              <thead>
+                <tr className="bg-white">
+                  <th className="border border-gray-300 px-3 py-2 text-sm font-medium text-left">Rep.</th>
+                  <th className="border border-gray-300 px-3 py-2 text-sm font-medium text-left">Volume</th>
+                  <th className="border border-gray-300 px-3 py-2 text-sm font-medium text-left">tempo</th>
+                  <th className="border border-gray-300 px-3 py-2 text-sm font-medium text-left">Vazão(l/h)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {repeticoes.map((repeticao, index) => (
+                  <tr key={index}>
+                    <td className="border border-gray-300 px-3 py-2 text-sm">{index + 1}°</td>
+                    <td className="border border-gray-300 px-2 py-1">
+                      <Input
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        value={repeticao.volume || ""}
+                        onChange={(e) => handleVolumeChange(index, Number.parseFloat(e.target.value) || 0)}
+                        className="h-8 text-sm border-0"
+                        placeholder="0"
+                      />
+                    </td>
+                    <td className="border border-gray-300 px-2 py-1">
+                      <Input
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        value={repeticao.tempo || ""}
+                        onChange={(e) => handleTempoChange(index, Number.parseFloat(e.target.value) || 0)}
+                        className="h-8 text-sm border-0"
+                        placeholder="0"
+                      />
+                    </td>
+                    <td className="border border-gray-300 px-3 py-2 text-sm text-center">
+                      {repeticao.vazao.toFixed(2)}
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {repeticoes.map((repeticao, index) => (
-                    <tr key={index}>
-                      <td className="border border-gray-300 px-2 py-1 text-center text-sm">{index + 1}°</td>
-                      <td className="border border-gray-300 px-1 py-1">
-                        <Input
-                          type="number"
-                          min="0"
-                          step="0.01"
-                          value={repeticao.volume || ""}
-                          onChange={(e) => handleVolumeChange(index, Number.parseFloat(e.target.value) || 0)}
-                          className="h-8 text-sm"
-                          placeholder="0"
-                        />
-                      </td>
-                      <td className="border border-gray-300 px-1 py-1">
-                        <Input
-                          type="number"
-                          min="0"
-                          step="0.01"
-                          value={repeticao.tempo || ""}
-                          onChange={(e) => handleTempoChange(index, Number.parseFloat(e.target.value) || 0)}
-                          className="h-8 text-sm"
-                          placeholder="0"
-                        />
-                      </td>
-                      <td className="border border-gray-300 px-2 py-1 text-center text-sm">
-                        {repeticao.vazao.toFixed(2)}
-                      </td>
-                      <td className="border border-gray-300 px-1 py-1 text-center">
-                        {repeticoes.length > 1 && (
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-6 w-6"
-                            onClick={() => removerRepeticao(index)}
-                          >
-                            <Trash2 className="h-3 w-3 text-red-500" />
-                          </Button>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
-            <div className="flex justify-between items-center">
-              <Button variant="outline" size="sm" onClick={adicionarRepeticao} className="flex items-center gap-1">
-                <Plus className="h-3 w-3" />
-                Adicionar repetição
+          <div className="flex justify-between items-center mt-4">
+            <div className="flex items-center gap-2">
+              <Button variant="ghost" size="sm" onClick={adicionarRepeticao} className="text-teal-600 h-8 px-2">
+                <Plus className="h-4 w-4 mr-1" />
+                <span className="text-xs">Adicionar</span>
               </Button>
-
-              <div className="text-sm">
-                <span className="font-medium">Média vazão: {mediaVazao.toFixed(2)}</span>
-              </div>
+              {repeticoes.length > 1 && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => removerRepeticao(repeticoes.length - 1)}
+                  className="text-red-600 h-8 px-2"
+                >
+                  <Trash2 className="h-4 w-4 mr-1" />
+                  <span className="text-xs">Remover</span>
+                </Button>
+              )}
             </div>
+          </div>
 
-            <div className="flex gap-2 pt-4">
-              <Button variant="outline" onClick={onFechar} className="flex-1">
-                Cancelar
-              </Button>
-              <Button onClick={handleSalvar} className="flex-1 bg-teal-600 hover:bg-teal-700 text-white">
-                Salvar
-              </Button>
-            </div>
+          <div className="flex justify-between items-center mt-4">
+            <p className="text-sm">média vazão: {mediaVazao.toFixed(2)}</p>
+            <Button onClick={handleSalvar} className="bg-teal-600 hover:bg-teal-700 text-white">
+              Salvar
+            </Button>
           </div>
         </div>
       </Card>

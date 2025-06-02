@@ -61,7 +61,7 @@ export function ComentariosSection({ comentarios, onAdicionarComentario }: Comen
       {/* Lista de comentários existentes */}
       <div className="space-y-2">
         {comentarios.map((comentario) => (
-          <Card key={comentario.id} className="p-3 bg-gray-200">
+          <Card key={comentario.id} className="p-3 bg-gray-100">
             <p className="text-sm">{comentario.texto}</p>
             {comentario.imagem && (
               <div className="mt-2">

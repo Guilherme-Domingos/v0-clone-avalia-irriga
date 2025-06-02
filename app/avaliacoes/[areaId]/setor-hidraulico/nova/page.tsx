@@ -8,10 +8,24 @@ import { ChevronLeft } from "lucide-react"
 import { AvaliacaoGrid } from "@/components/avaliacao-grid"
 import { ComentariosSection } from "@/components/comentarios-section"
 
+interface Comentario {
+  id: string
+  texto: string
+  imagem?: string
+}
+
 export default function NovaAvaliacaoSetorHidraulico({ params }: { params: { areaId: string } }) {
   const router = useRouter()
-  const [pontosAvaliados, setPontosAvaliados] = useState<{ [key: string]: boolean }>({})
-  const [comentarios, setComentarios] = useState<Array<{ id: string; texto: string; imagem?: string }>>([
+  const [pontosAvaliados, setPontosAvaliados] = useState<{ [key: string]: boolean }>({
+    "2-2": true,
+    "2-3": true,
+    "3-0": true,
+    "3-1": true,
+    "3-2": true,
+    "3-3": true,
+  })
+
+  const [comentarios, setComentarios] = useState<Comentario[]>([
     {
       id: "1",
       texto: "Gotejamento no ponto X está entupido. Trocar filtro",

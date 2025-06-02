@@ -1,7 +1,6 @@
 "use client"
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
+import React, { useState } from "react"
 import { PontoAvaliacaoModal } from "@/components/ponto-avaliacao-modal"
 
 interface AvaliacaoGridProps {
@@ -50,37 +49,34 @@ export function AvaliacaoGrid({ onPontoAvaliado, pontosAvaliados }: AvaliacaoGri
       <div className="grid grid-cols-5 gap-2 mb-4">
         {/* Cabeçalho das colunas */}
         <div></div>
-        {labels.map((label) => (
-          <div key={label} className="text-center text-sm font-medium">
+        {labels.map((label, index) => (
+          <div key={`col-${index}`} className="text-center text-sm font-medium">
             {label}
           </div>
         ))}
 
         {/* Linhas da grade */}
         {labels.map((labelLinha, linha) => (
-          <>
+          <React.Fragment key={`row-${linha}`}>
             {/* Label da linha */}
-            <div key={`label-${linha}`} className="text-center text-sm font-medium flex items-center">
-              {labelLinha}
-            </div>
+            <div className="text-center text-sm font-medium flex items-center justify-center">{labelLinha}</div>
 
             {/* Pontos da linha */}
             {labels.map((_, coluna) => {
               const avaliado = isPontoAvaliado(linha, coluna)
               return (
-                <Button
-                  key={`${linha}-${coluna}`}
-                  variant="outline"
-                  className={`w-12 h-12 p-0 rounded-full border-2 ${
-                    avaliado
-                      ? "bg-teal-500 border-teal-600 hover:bg-teal-600"
-                      : "bg-gray-800 border-gray-900 hover:bg-gray-700"
-                  }`}
-                  onClick={() => handleClickPonto(linha, coluna)}
-                />
+                <div key={`ponto-${linha}-${coluna}`} className="flex justify-center items-center">
+                  <button
+                    className={`w-12 h-12 rounded-full ${
+                      avaliado ? "bg-teal-500" : "bg-black"
+                    } hover:opacity-80 transition-colors`}
+                    onClick={() => handleClickPonto(linha, coluna)}
+                    aria-label={`Ponto ${labelLinha} x ${labels[coluna]}`}
+                  />
+                </div>
               )
             })}
-          </>
+          </React.Fragment>
         ))}
       </div>
 
