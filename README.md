@@ -2,8 +2,8 @@
 
 *Automatically synced with your [v0.dev](https://v0.dev) deployments*
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/guilherme-domingos-projects/v0-clone-avalia-irriga)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/0DcmO8o4qIj)
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/arquerobranco9990-5451s-projects/v0-clone-avalia-irriga-k6)
+[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/kbE9dnYOl7m)
 
 ## Overview
 
@@ -14,13 +14,13 @@ Any changes you make to your deployed app will be automatically pushed to this r
 
 Your project is live at:
 
-**[https://vercel.com/guilherme-domingos-projects/v0-clone-avalia-irriga](https://vercel.com/guilherme-domingos-projects/v0-clone-avalia-irriga)**
+**[https://vercel.com/arquerobranco9990-5451s-projects/v0-clone-avalia-irriga-k6](https://vercel.com/arquerobranco9990-5451s-projects/v0-clone-avalia-irriga-k6)**
 
 ## Build your app
 
 Continue building your app on:
 
-**[https://v0.dev/chat/projects/0DcmO8o4qIj](https://v0.dev/chat/projects/0DcmO8o4qIj)**
+**[https://v0.dev/chat/projects/kbE9dnYOl7m](https://v0.dev/chat/projects/kbE9dnYOl7m)**
 
 ## How It Works
 
