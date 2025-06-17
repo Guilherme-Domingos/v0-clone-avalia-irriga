@@ -1,26 +1,17 @@
 'use client';
 
-import { useAuth } from '@/lib/providers/auth-provider';
 import { useEffect, useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { RefreshCw, User, Mail, Building } from 'lucide-react';
+import { authClient } from '@/utils/auth-client';
 
 export function UserProfile() {
-  const { userData, getUserData, isLoading } = useAuth();
   const [refreshing, setRefreshing] = useState(false);
-
-  const handleRefreshUserData = async () => {
-    setRefreshing(true);
-    try {
-      await getUserData();
-    } catch (error) {
-      console.error('Erro ao atualizar dados do usuário:', error);
-    } finally {
-      setRefreshing(false);
-    }
-  };
+  const { useSession } = authClient;
+  const { data: session, isPending } = useSession();
+ 
 
   const getInitials = (name: string): string => {
     return name
@@ -31,7 +22,7 @@ export function UserProfile() {
       .slice(0, 2);
   };
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <Card className='w-full max-w-md'>
         <CardHeader>
@@ -50,7 +41,7 @@ export function UserProfile() {
     );
   }
 
-  if (!userData) {
+  if (!session) {
     return (
       <Card className='w-full max-w-md'>
         <CardHeader>
@@ -61,14 +52,6 @@ export function UserProfile() {
             <p className='text-gray-500 mb-4'>
               Dados do usuário não carregados
             </p>
-            <Button onClick={handleRefreshUserData} disabled={refreshing}>
-              {refreshing ? (
-                <RefreshCw className='w-4 h-4 mr-2 animate-spin' />
-              ) : (
-                <RefreshCw className='w-4 h-4 mr-2' />
-              )}
-              Carregar Dados
-            </Button>
           </div>
         </CardContent>
       </Card>
@@ -79,43 +62,32 @@ export function UserProfile() {
     <Card className='w-full max-w-md'>
       <CardHeader className='flex flex-row items-center justify-between'>
         <CardTitle>Perfil do Usuário</CardTitle>
-        <Button
-          variant='outline'
-          size='sm'
-          onClick={handleRefreshUserData}
-          disabled={refreshing}>
-          {refreshing ? (
-            <RefreshCw className='w-4 h-4 animate-spin' />
-          ) : (
-            <RefreshCw className='w-4 h-4' />
-          )}
-        </Button>
       </CardHeader>
       <CardContent>
         <div className='space-y-4'>
           <div className='flex items-center space-x-4'>
             <Avatar className='w-16 h-16'>
-              <AvatarImage src={userData.photo} alt={userData.name} />
+              
+              <AvatarImage src={session.user.image} alt={session.user.name} />
               <AvatarFallback className='text-lg'>
-                {getInitials(userData.name)}
+                {getInitials(session.user.name)}
               </AvatarFallback>
             </Avatar>
             <div>
-              <h3 className='text-xl font-semibold'>{userData.name}</h3>
-              <p className='text-gray-500'>ID: {userData.id}</p>
+              <h3 className='text-xl font-semibold'>{session.user.name}</h3>
             </div>
           </div>
 
           <div className='space-y-3'>
             <div className='flex items-center space-x-2'>
               <Mail className='w-4 h-4 text-gray-500' />
-              <span className='text-sm'>{userData.email}</span>
+              <span className='text-sm'>{session.user.email}</span>
             </div>
 
-            {userData.organization && (
+            {session.user.name && (
               <div className='flex items-center space-x-2'>
                 <Building className='w-4 h-4 text-gray-500' />
-                <span className='text-sm'>{userData.organization}</span>
+                <span className='text-sm'>{session.user.name}</span>
               </div>
             )}
           </div>

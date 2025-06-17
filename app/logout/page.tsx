@@ -1,17 +1,22 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useAuth } from '@/lib/providers/auth-provider';
+import { authClient } from '@/utils/auth-client';
 
 export default function LogoutPage() {
-  const { logout } = useAuth();
-
   useEffect(() => {
     const performLogout = async () => {
       try {
-        await logout();
+        // Limpar token do localStorage
+        if (typeof window !== 'undefined') {
+          localStorage.removeItem('auth-token');
+        }
+
+        // Fazer logout na API
+        await authClient.signOut();
       } catch (error) {
         console.error('Erro no logout:', error);
+      } finally {
         // Mesmo se der erro, force o redirecionamento
         if (typeof window !== 'undefined') {
           window.location.href = '/login';
@@ -20,7 +25,7 @@ export default function LogoutPage() {
     };
 
     performLogout();
-  }, [logout]);
+  }, []);
 
   return (
     <div className='flex items-center justify-center min-h-screen bg-gray-50'>

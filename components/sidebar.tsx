@@ -6,12 +6,15 @@ import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { LayoutGrid, FileText, User, Menu, X, Home } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { authClient } from "@/utils/auth-client"
 
 interface SidebarProps {
   activeItem?: "fazendas" | "areas" | "relatorios" | "perfil"
 }
 
 export function Sidebar({ activeItem }: SidebarProps) {
+  const { useSession } = authClient;
+  const { data: session, isPending } = useSession();
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
 
@@ -101,7 +104,7 @@ export function Sidebar({ activeItem }: SidebarProps) {
               <User className="h-4 w-4" />
             </div>
             <div className="text-sm">
-              <p className="font-medium">João Silva</p>
+              <p className="font-medium">{session?.user.name}</p>
               <p className="text-teal-200 text-xs">Técnico Responsável</p>
             </div>
           </div>
